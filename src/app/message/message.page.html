@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      消息
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <List [className]="'my-list'">
+    <ListItem data-seed="logId">消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试</ListItem>
+    <ListItem wrap>消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试</ListItem>
+    <ListItem [extra]="'详情'" multipleLine [align]="'top'" wrap>
+      消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试
+    </ListItem>
+    <ListItem  [className]="'spe'" wrap>
+      消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试消息内容测试，消息内容测试    </ListItem>
+  </List>
+  <!-- <List [className]="'my-list'" [renderHeader]=(renderHeader6)>
+    <ListItem [disabled]="disabled" [extra]="" (click)="onDisableClick()">Click to disable</ListItem>
+    <ListItem>
+      <select>
+        <option [value]="'1'">Html select element</option>
+        <option [value]="'2'" disabled>Unable to select</option>
+        <option [value]="'3'">option 3</option>
+      </select>
+    </ListItem>
+  </List> -->
+</ion-content>

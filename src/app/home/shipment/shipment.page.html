@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+
+      发货
+    </ion-title>
+    <ion-buttons slot="end">
+      <div Button style="margin-right: 4px" [type]="'warning'" [inline]="true" [size]="'small'">取消发货</div>
+
+      <div Button style="margin-right: 4px" [type]="'primary'" [inline]="true" [size]="'small'" (click)="submit('1')">发货</div>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <div class="am-list" style="margin:0;">
+    <div class="am-list-header">订单信息</div>
+    <div class="am-list-body">
+      <InputItem [placeholder]="'订单号'"  [extra]="'查询'" (onExtraClick)="search()" [(ngModel)]="model.order_no">
+        <span>订单号</span>
+      </InputItem>
+      <InputItem [placeholder]="'出货地址'"  [(ngModel)]="model.delivery_to_address">
+        <span>出货地址</span>
+      </InputItem>
+      <InputItem [placeholder]="'件数'" [(ngModel)]="model.package_qty">
+        <span>件数</span>
+      </InputItem>
+      <InputItem [placeholder]="'备注'"  [(ngModel)]="model.remark">
+        <span>备注</span>
+      </InputItem>
+    </div>
+  </div>
+  <ImagePicker [files]="files" [selectable]="files.length < 5" [multiple]="false" (onChange)="fileChange($event)"
+    ></ImagePicker>
+
+</ion-content>

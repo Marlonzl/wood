@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      首页
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="sub-title">功能菜单</div>
+  <Grid [activeStyle]="true" [data]="grid" (OnClick)="click($event)"></Grid>
+  <!-- <ul>
+    <li *ngFor="let item of grid">{{item.text}}</li>
+  </ul> -->
+</ion-content>

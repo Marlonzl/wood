@@ -1,0 +1,8 @@
+{
+  "name": "woodMobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "fa76f861"
+}

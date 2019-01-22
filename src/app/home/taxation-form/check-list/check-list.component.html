@@ -1,0 +1,20 @@
+<div class="mask" *ngIf="open"></div>
+<div class="content" *ngIf="open">
+  <List [renderHeader]=(renderHeader)>
+    <!-- <RadioItemGroup [(ngModel)]="selectedStatus1.value" (onChange)="onChange($event)">
+      <RadioItem *ngFor="let i of data" [name]="i.special_price" [value]="i.id">
+        {{i.wage_type}}({{i.wage_rule}}):{{i.special_price}}
+      </RadioItem>
+    </RadioItemGroup> -->
+
+    <CheckboxItem *ngFor="let i of data" [name]="i.special_price" [value]="i.id" [(ngModel)]="i.checked" (onChange)="onChange($event)">
+      {{i.wage_name}}({{i.wage_rule}}):{{i.special_price}}
+    </CheckboxItem>
+    <ListItem>
+      <div Button [type]="'ghost'" [size]="'small'" (click)="cancel()" style="margin-bottom:5px;">取消</div>
+
+      <div Button [type]="'ghost'" [size]="'small'" (click)="ok()">确定</div>
+    </ListItem>
+
+  </List>
+</div>

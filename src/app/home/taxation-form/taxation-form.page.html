@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      报单
+    </ion-title>
+    <ion-buttons slot="end">
+      <div Button style="margin-right: 4px" [type]="'primary'" [inline]="true" [size]="'small'" (click)="submit()">报单</div>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <app-check-list [data]='listData' [open]="this.state.open" (openChange)="openChange($event)"></app-check-list>
+
+  <div class="am-list" style="margin:0;">
+    <div class="am-list-body">
+      <InputItem [placeholder]="'员工'" [(ngModel)]="model.employee">
+        <span>员工</span>
+      </InputItem>
+      <InputItem [placeholder]="'订单号'" [extra]="'查询'" [(ngModel)]="model.order_no" (onExtraClick)="search()">
+        <span>订单号</span>
+      </InputItem>
+
+      <InputItem [placeholder]="'记录数'" [(ngModel)]="model.total">
+        <span>记录数</span>
+      </InputItem>
+    </div>
+    <WhiteSpace [size]="'sm'"></WhiteSpace>
+
+
+    <List [className]="'my-list'" [renderHeader]='(renderHeader)' *ngFor="let item of json;let index1 = index">
+      <!-- <ng-container *ngFor="let item of list1; let index2 = index"> -->
+      <!-- <InputItem [extra]="item.data_list?'选择':''" (onExtraClick)="listSelect(item.data_list,index1,index2)" [ngStyle]="{'background-color':index2 === 0 ? '#F5F5F9' : ''}"
+          [editable]="editable!='0'" [defaultValue]="item.data_value" *ngIf="item.visiable === '1'" (onChange)="inputChange($event,item,index1,index2)"
+          [(ngModel)]='item.data_value'>
+          <input type="checkbox" *ngIf="index2 === 0">
+          {{item.data_title}}
+        </InputItem>
+
+
+        <InputItem [extra]="item.data_list?'选择':''" (onExtraClick)="listSelect(item.data_list,index1,index2)" [ngStyle]="{'background-color':index2 === 0 ? '#F5F5F9' : ''}"
+          [editable]="editable!='0'" [defaultValue]="item.data_value" *ngIf="item.visiable === '1'" (onChange)="inputChange($event,item,index1,index2)"
+          [(ngModel)]='item.data_value'>
+          <input type="checkbox" *ngIf="index2 === 0">
+          {{item.data_title}}
+        </InputItem>
+      </ng-container> -->
+      <InputItem [defaultValue]="item.operate_info" [editable]="false" [ngStyle]="{'background-color':'#F5F5F9'}" (click)="checkBox(item.checked,index1)">
+        <input type="checkbox" [(ngModel)]='item.checked' >
+        工序编号/名称:
+      </InputItem>
+
+      <InputItem [defaultValue]="item.prod_name" [disabled]="true">
+        产品名称:
+      </InputItem>
+      <InputItem [defaultValue]="item.prod_spec" [disabled]="true">
+        规格:
+      </InputItem>
+      <InputItem [defaultValue]="item.custom_size" [disabled]="true">
+        尺寸
+      </InputItem>
+      <InputItem [defaultValue]="item.calculate_qty_unit_name" [disabled]="true">
+        订单数量(单位)：
+      </InputItem>
+      <InputItem [defaultValue]="item.submit_qty" [disabled]="true">
+        已报数量：
+      </InputItem>
+      <InputItem [defaultValue]="item.operate_qty" [disabled]="false" (onChange)="inputChange($event,index1)"
+        [(ngModel)]='item.operate_qty' *ngIf="item.unit_name_2==''">
+        本次报单数量：
+      </InputItem>
+      <!-- 单位2不为空时的情况 -->
+      <InputItem [defaultValue]="item.operate_qty_2" [extra]="'item.operate_qty'" [disabled]="false" (onChange)="inputChange($event,index1)"
+        [(ngModel)]='item.operate_qty_2' *ngIf="item.unit_name_2!=''">
+        本次报单数量：
+      </InputItem>
+      <InputItem [defaultValue]="item.spe_wage_value" [disabled]="false" *ngIf="item.spe_wage" [extra]="'选择'"
+        (onExtraClick)="listSelect(item.spe_wage,index1)">
+        特殊工资计算：
+      </InputItem>
+      <InputItem [defaultValue]="item.add_amount" [disabled]="false" (onChange)="inputChange($event,index1)"
+        [(ngModel)]='item.add_amount'>
+        加给金额：
+      </InputItem>
+      <InputItem [defaultValue]="item.add_amount_remark" [disabled]="false" [(ngModel)]='item.add_amount_remark'>
+        加给备注：
+      </InputItem>
+      <InputItem [defaultValue]="item.operate_price_info" [disabled]="true">
+        单价：
+      </InputItem>
+      <InputItem [defaultValue]="item.operate_amount" [disabled]="true">
+        金额：
+      </InputItem>
+      <WhiteSpace [size]="'sm'"></WhiteSpace>
+    </List>
+
+
+    <!-- base_amount: "840.00"
+    base_amount_2: "840.00"
+    base_id: "31695"
+    base_price: "120.00"
+    base_qty: "7.0000"
+    base_qty_2: "0.0000"
+    base_unit_name: "只"
+    base_unit_name_2: ""
+    calculate_qty_unit_name: "7.0000(只)"
+    custom_height: "0.0000"
+    custom_length: "0.0000"
+    custom_size: "0.00000.00000.0000"
+    custom_width: "0.0000"
+    data_from_flag: "1"
+    discount_rate: "100.0000"
+    form_no: "bjw-20190121"
+    form_process_id: ""
+    form_prod_id: "154"
+    is_necessary: "1"
+    is_outsource: "0"
+    is_woodware: "1"
+    max_qty: "7.0000"
+    operate_amount: "0"
+    operate_code: "A20"
+    operate_info: "A20/小柱出胚"
+    operate_name: "小柱出胚"
+    operate_price: "0.3500"
+    operate_price_info: "0.3500/0.3500"
+    operate_qty: ""
+    operate_qty_2: ""
+    operate_remark: ""
+    operate_unit_name: "只"
+    operate_woodmaterial: ""
+    operator_no: "1882387"
+    order_remark: ""
+    price_type: ""
+    process_code: ""
+    process_name: ""
+    prod_code: "XL-05"
+    prod_name: "豪华花瓶金杯小柱"
+    prod_spec: "48*48*850"
+    prod_type: "小柱"
+    prod_type_id: "5"
+    remark: ""
+    shape_spec: ""
+    shape_type: "38"
+    ship_id: "8"
+    ship_prod_id: "154"
+    shop_floor: ""
+    spec_code: "1"
+    standard_base_price: ""
+    standard_operate_price: "0.3500"
+    submit_qty: "0"
+    unit_name: "只"
+    unit_name_2: ""
+    unit_name_type: "291"
+    unit_name_type_2: ""
+    woodmaterial: "66" -->
+  </div>
+
+</ion-content>

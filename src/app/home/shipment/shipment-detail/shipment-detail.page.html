@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home/shipment-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      发货单选取
+    </ion-title>
+    <ion-buttons slot="end">
+      <!-- <div Button style="margin-right: 4px" [type]="'primary'" [inline]="true" [size]="'small'" (click)="onOpenChange($event)">报单</div> -->
+      <Icon [type]="'ellipsis'" (click)="onOpenChange($event)"></Icon>
+
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <Drawer class="my-drawer" [ngStyle]="{minHeight: this.height+'px'}" [contentStyle]="{ color: '#A6A6A6', textAlign: 'center', paddingTop: '42px' }"
+    [enableDragHandle]="true" [sidebar]="sidebar" [open]="this.state.open" (onOpenChange)="onOpenChange($event)">
+  </Drawer>
+
+  <ng-template #sidebar>
+    <InputItem [placeholder]="'订单号'" [focus]="titleFocus">
+      <span (click)="clickTitle()">订单号</span>
+    </InputItem>
+
+    <!-- 日期选择 -->
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(date_vlaue, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="date_vlaue" (onOk)="onOk2($event)">
+       {{ date_name }}
+      </ListItem>
+
+      <!-- 选择出货单还是批量生产单 -->
+      <RadioItemGroup [(ngModel)]="selectedStatus1.value" (onChange)="onChange($event)">
+        <RadioItem *ngFor="let i of data1" [name]="i.name" [value]="i.value">
+          {{i.name}}
+        </RadioItem>
+      </RadioItemGroup>
+
+      
+
+      <ListItem><div Button [type]="'ghost'" [size]="'small'" (click)="search()">查询</div></ListItem>
+
+    </List>
+  </ng-template>
+
+  <List [className]="'my-list'" *ngFor="let item of data" (click)="selected(item)">
+    <ListItem [extra]="item.order_no" [ngStyle]="{'background-color':'#F5F5F9'}">订单号:</ListItem>
+    <ListItem [extra]="item.create_by">收货人:</ListItem>
+    <ListItem [extra]="item.delivery_to_address">收货地址:</ListItem>
+  </List>
+
+</ion-content>
